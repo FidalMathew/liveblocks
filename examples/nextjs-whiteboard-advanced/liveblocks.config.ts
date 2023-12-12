@@ -4,7 +4,7 @@ import { LiveList, LiveMap, LiveObject } from "@liveblocks/client";
 import { Point, Color, Layer } from "./src/types";
 
 const client = createClient({
-  throttle: 16,
+  throttle: 0,
   authEndpoint: "/api/liveblocks-auth",
 });
 

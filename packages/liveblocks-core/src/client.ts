@@ -16,10 +16,6 @@ import {
   makeCreateSocketDelegateForRoom,
 } from "./room";
 
-const MIN_THROTTLE = 16;
-const MAX_THROTTLE = 1_000;
-const DEFAULT_THROTTLE = 100;
-
 const MIN_BACKGROUND_KEEP_ALIVE_TIMEOUT = 15_000;
 const MIN_LOST_CONNECTION_TIMEOUT = 200;
 const RECOMMENDED_MIN_LOST_CONNECTION_TIMEOUT = 1_000;
@@ -217,7 +213,7 @@ export function createClient(options: ClientOptions): Client {
   type OpaqueRoom = Room<JsonObject, LsonObject, BaseUserMeta, Json>;
 
   const clientOptions = options;
-  const throttleDelay = getThrottle(clientOptions.throttle ?? DEFAULT_THROTTLE);
+  const throttleDelay = 0;
   const lostConnectionTimeout = getLostConnectionTimeout(
     clientOptions.lostConnectionTimeout ?? DEFAULT_LOST_CONNECTION_TIMEOUT
   );
@@ -445,10 +441,6 @@ function getBackgroundKeepAliveTimeout(
     value,
     MIN_BACKGROUND_KEEP_ALIVE_TIMEOUT
   );
-}
-
-function getThrottle(value: number): number {
-  return checkBounds("throttle", value, MIN_THROTTLE, MAX_THROTTLE);
 }
 
 function getLostConnectionTimeout(value: number): number {
